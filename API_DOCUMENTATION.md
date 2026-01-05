@@ -124,6 +124,7 @@ Create a new Nano wallet with password encryption.
 {
   "password": "your_secure_password",
   "password_confirmation": "your_secure_password",
+  "email": "your_email@example.com",
   "api_key": "your_api_key"
 }
 ```
@@ -132,6 +133,11 @@ Create a new Nano wallet with password encryption.
 - Must contain at least one uppercase letter
 - Must contain at least one special character
 - Must match password_confirmation exactly
+
+**Email (Optional but Recommended):**
+- If provided, your encrypted wallet backup will be sent to this email
+- Prevents data loss if you lose your wallet string
+- Must be a valid email format (contains @ and .)
 
 **Response:**
 ```json
@@ -149,6 +155,7 @@ curl -X POST https://api.x402nano.com/wallet/create \
   -d '{
     "password": "MySecurePassword123!",
     "password_confirmation": "MySecurePassword123!",
+    "email": "your_email@example.com",
     "api_key": "your_api_key_here"
   }'
 ```
@@ -157,6 +164,8 @@ curl -X POST https://api.x402nano.com/wallet/create \
 - Store the `encrypted_wallet_string` securely - this is required for all future operations
 - Password must match password_confirmation
 - The wallet is encrypted client-side before storage
+- **Recommended:** Provide an email address to receive a backup of your encrypted wallet string
+- Email backup prevents data loss if you lose your wallet string (especially useful for AI chat sessions)
 
 ---
 

@@ -25,6 +25,7 @@ Welcome to the x402 Nano API documentation. This API provides a secure, easy-to-
 - Create new wallets with password encryption
 - Import existing wallets from seed
 - Secure wallet unlock mechanism
+- Optional email backup for wallet recovery
 
 ✅ **Transaction Processing**
 - Send Nano to any address
@@ -61,9 +62,10 @@ curl -X POST https://api.x402nano.com/wallet/create \
   -d '{
     "password": "SecurePassword123!",
     "password_confirmation": "SecurePassword123!",
+    "email": "backup@example.com",
     "api_key": "CZtYHgn0Nk8KPvtlkwARjF+m601hC00pqYQwzXaKixU="
   }'
-# Returns: Encrypted wallet string
+# Returns: Encrypted wallet string (also sent to email for backup)
 
 # 3. Unlock wallet to get your address
 curl -X POST https://api.x402nano.com/wallet/unlock \

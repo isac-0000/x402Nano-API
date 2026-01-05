@@ -51,6 +51,7 @@ curl -X POST https://api.x402nano.com/wallet/create \
   -d '{
     "password": "YourSecurePassword123!",
     "password_confirmation": "YourSecurePassword123!",
+    "email": "your_email@example.com",
     "api_key": "your_api_key_from_step_1"
   }'
 ```
@@ -60,12 +61,17 @@ curl -X POST https://api.x402nano.com/wallet/create \
 - Must contain at least one special character
 - Must match password_confirmation
 
+**Email (Optional but Recommended):**
+- Providing an email address will send you a backup of your encrypted wallet
+- Prevents data loss if you lose your wallet string
+- Especially useful for AI chat sessions that may close unexpectedly
+
 **Response:**
 ```
 NihweB70VlrFi5nSFzJkQonXzSJhJZVaqogIoODKTdtwoFDLJy2AsAjaSgycsOhd59txyP1XR+j/4ffJBnUjgtZZg4Y73Afv6q7kY4YHoUd1nJxVqDStK602rRqhik47epY0dgrYAGFAGSEz10Da7aEpfr7wdLzoYkQVdohPcgizgjzMARtnaea0rZ625X96h9dNnI9MzCnIsSdXKWu5fzLZ...
 ```
 
-**Important:** Save the encrypted wallet string. To get your wallet address, unlock it:
+**Important:** Save the encrypted wallet string. If you provided an email, you'll also receive a backup via email. To get your wallet address, unlock it:
 
 ```bash
 curl -X POST https://api.x402nano.com/wallet/unlock \
