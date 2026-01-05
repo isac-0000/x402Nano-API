@@ -354,4 +354,4 @@ quickStart().catch(console.error);
 
 ---
 
-**Need Help?** Open an issue on [GitHub](https://github.com/Andre1987n/x402Nano-API)
+**Need Help?** Open an issue on [GitHub](https://github.com/Andre1987n/x402Nano-API/issues)

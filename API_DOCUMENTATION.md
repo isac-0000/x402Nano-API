@@ -38,6 +38,9 @@ This API is currently in active development and testing. Please be aware:
    - [Get Balance](#5-get-balance)
    - [Receive Transactions](#6-receive-transactions)
    - [Send Transaction](#7-send-transaction)
+   - [Create Payment Transaction](#8-create-payment-transaction)
+   - [Pay Transaction](#9-pay-transaction)
+   - [Get Transaction Status](#10-get-transaction-status)
 3. [Error Handling](#error-handling)
 4. [Rate Limiting](#rate-limiting)
 5. [Security Best Practices](#security-best-practices)
@@ -402,6 +405,187 @@ curl -X POST https://api.x402nano.com/send \
 
 ---
 
+### 8. Create Payment Transaction
+
+Create a temporary payment transaction for users to pay. Returns a unique transaction ID and payment details that expire after 60 minutes.
+
+**Endpoint:** `POST /api/transactions/create`
+
+**Request Headers:**
+```json
+{
+  "Content-Type": "application/json"
+}
+```
+
+**Request Body:**
+```json
+{
+  "receive_address": "nano_1your_server_address",
+  "amount": "1.5"
+}
+```
+
+**Response:**
+```json
+{
+  "receive_address": "nano_1your_server_address",
+  "amount": "1.5",
+  "transaction_id": "550e8400-e29b-41d4-a716-446655440000"
+}
+```
+
+**cURL Example:**
+```bash
+curl -X POST https://api.x402nano.com/api/transactions/create \
+  -H "Content-Type: application/json" \
+  -d '{
+    "receive_address": "nano_1your_server_address",
+    "amount": "1.5"
+  }'
+```
+
+**Notes:**
+- Transaction expires after 60 minutes
+- Expired transactions are automatically cleaned up every 5 minutes
+- Transaction ID is a UUID v4
+- Save the transaction_id to check payment status later
+
+---
+
+### 9. Pay Transaction
+
+Process payment for a previously created transaction using encrypted wallet credentials.
+
+**Endpoint:** `POST /api/transactions/pay`
+
+**Request Headers:**
+```json
+{
+  "Content-Type": "application/json"
+}
+```
+
+**Request Body:**
+```json
+{
+  "transaction_id": "550e8400-e29b-41d4-a716-446655440000",
+  "encrypted_wallet_string": "your_encrypted_wallet_data",
+  "password": "your_password",
+  "amount": "1.5"
+}
+```
+
+**Response:**
+```json
+{
+  "success": "true",
+  "transaction_id": "550e8400-e29b-41d4-a716-446655440000",
+  "to_address": "nano_1your_server_address",
+  "amount": "1.5"
+}
+```
+
+**cURL Example:**
+```bash
+curl -X POST https://api.x402nano.com/api/transactions/pay \
+  -H "Content-Type: application/json" \
+  -d '{
+    "transaction_id": "550e8400-e29b-41d4-a716-446655440000",
+    "encrypted_wallet_string": "encrypted_data_here",
+    "password": "MySecurePassword123!",
+    "amount": "1.5"
+  }'
+```
+
+**Error Responses:**
+```json
+{
+  "error": "invalid_transaction_id",
+  "message": "Invalid transaction ID"
+}
+```
+
+```json
+{
+  "error": "transaction_expired",
+  "message": "Transaction has expired. Please create a new transaction."
+}
+```
+
+```json
+{
+  "error": "amount_mismatch",
+  "message": "Amount does not match the created transaction amount. Amount should be 1.5."
+}
+```
+
+**Notes:**
+- Amount must exactly match the amount specified during creation
+- Transaction must not be expired (< 60 minutes old)
+- Once paid, transaction is moved from pending to paid cache
+- Payment is irreversible
+
+---
+
+### 10. Get Transaction Status
+
+Check the payment status of a transaction with long-polling support (waits up to 30 seconds for payment confirmation).
+
+**Endpoint:** `GET /api/transactions/status/{transaction_id}`
+
+**Request Headers:**
+```json
+{
+  "Content-Type": "application/json"
+}
+```
+
+**Response (Paid):**
+```json
+{
+  "success": "true",
+  "message": "Transaction has been paid.",
+  "transaction_id": "550e8400-e29b-41d4-a716-446655440000",
+  "is_paid": true
+}
+```
+
+**Response (Not Found):**
+```json
+{
+  "success": "false",
+  "message": "Transaction ID not found.",
+  "transaction_id": "550e8400-e29b-41d4-a716-446655440000",
+  "is_paid": false
+}
+```
+
+**Response (Timeout):**
+```json
+{
+  "success": "false",
+  "message": "Transaction has not been paid within the timeout period. Try again later.",
+  "transaction_id": "550e8400-e29b-41d4-a716-446655440000",
+  "is_paid": false
+}
+```
+
+**cURL Example:**
+```bash
+curl -X GET https://api.x402nano.com/api/transactions/status/550e8400-e29b-41d4-a716-446655440000 \
+  -H "Content-Type: application/json"
+```
+
+**Notes:**
+- Long-polling: Request waits up to 30 seconds for payment
+- Checks payment status every 500ms
+- Returns immediately if transaction is paid or not found
+- Returns after 30 seconds if still pending
+- Ideal for payment confirmation pages
+
+---
+
 ## Error Handling
 
 All endpoints return standard HTTP status codes:
@@ -705,7 +889,7 @@ async function sendNano(encryptedWallet, password, toAddress, amount) {
 
 - **GitHub Repository:** [x402 Nano API](https://github.com/Andre1987n/x402Nano-API)
 - **Nano Documentation:** [docs.nano.org](https://docs.nano.org)
-- **Issue Tracking:** GitHub Issues
+- **Issue Tracking:** [GitHub Issues](https://github.com/Andre1987n/x402Nano-API/issues)
 
 ---
 

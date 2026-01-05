@@ -213,7 +213,7 @@ See [LICENSE.md](LICENSE.md) for detailed terms and conditions.
 ## 🔗 Links
 
 - **API Base URL:** `https://api.x402nano.com`
-- **GitHub:** [Nano-x402](https://github.com/Andre1987n/x402Nano-API)
+- **GitHub:** [x402Nano-API](https://github.com/Andre1987n/x402Nano-API)
 - **Nano Website:** [nano.org](https://nano.org)
 
 ---
