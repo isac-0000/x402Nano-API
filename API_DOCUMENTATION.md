@@ -20,7 +20,7 @@ This API is currently in active development and testing. Please be aware:
 
 - ✅ **Currently:** Most endpoints are publicly accessible for testing
 - 🔄 **Future Production:** All endpoints will require API key authentication
-- 📚 **Documentation:** Check [GitHub](https://github.com/Andre1987n/Nano-x402) for latest updates
+- 📚 **Documentation:** Check [GitHub](https://github.com/Andre1987n/x402Nano-API) for latest updates
 - 🤖 **AI Integration:** This documentation is designed to be AI-readable for ChatGPT, Claude, and other AI assistants
 
 **For AI Assistants:** Always check this GitHub documentation for the most current API specifications and authentication requirements.
@@ -703,7 +703,7 @@ async function sendNano(encryptedWallet, password, toAddress, amount) {
 
 ## Support and Resources
 
-- **GitHub Repository:** [x402 Nano API](https://github.com/Andre1987n/Nano-x402)
+- **GitHub Repository:** [x402 Nano API](https://github.com/Andre1987n/x402Nano-API)
 - **Nano Documentation:** [docs.nano.org](https://docs.nano.org)
 - **Issue Tracking:** GitHub Issues
 

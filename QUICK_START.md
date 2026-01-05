@@ -10,7 +10,7 @@ This guide will help you get started with the x402 Nano API in minutes.
 
 - Most endpoints are currently open for testing without strict API key requirements
 - **In production:** All endpoints will require API key authentication
-- API behavior may change - check [GitHub](https://github.com/Andre1987n/Nano-x402) for updates
+- API behavior may change - check [GitHub](https://github.com/Andre1987n/x402Nano-API) for updates
 - Designed for AI assistant integration (ChatGPT, Claude, etc.)
 
 ---
@@ -354,4 +354,4 @@ quickStart().catch(console.error);
 
 ---
 
-**Need Help?** Open an issue on [GitHub](https://github.com/Andre1987n/Nano-x402)
+**Need Help?** Open an issue on [GitHub](https://github.com/Andre1987n/x402Nano-API)

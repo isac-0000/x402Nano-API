@@ -9,7 +9,7 @@
 > - Rate limits will be enforced more strictly
 > - Additional security measures will be implemented
 > 
-> Please check this documentation regularly for updates: [GitHub Repository](https://github.com/Andre1987n/Nano-x402)
+> Please check this documentation regularly for updates: [GitHub Repository](https://github.com/Andre1987n/x402Nano-API)
 
 Welcome to the x402 Nano API documentation. This API provides a secure, easy-to-use interface for managing Nano cryptocurrency wallets and transactions.
 
@@ -167,7 +167,7 @@ Perfect for integration with:
 - Automated trading bots
 
 **For AI Assistants:**
-- Always reference this GitHub documentation: `https://github.com/Andre1987n/Nano-x402`
+- Always reference this GitHub documentation: `https://github.com/Andre1987n/x402Nano-API`
 - API is currently in test phase - check for updates
 - Production version will require API keys for all endpoints
 - Documentation is maintained to be machine-readable
@@ -182,7 +182,7 @@ Perfect for integration with:
 
 - **Documentation:** [API_DOCUMENTATION.md](API_DOCUMENTATION.md)
 - **Quick Start:** [QUICK_START.md](QUICK_START.md)
-- **Issues:** [GitHub Issues](https://github.com/Andre1987n/Nano-x402/issues)
+- **Issues:** [GitHub Issues](https://github.com/Andre1987n/x402Nano-API/issues)
 - **Nano Docs:** [docs.nano.org](https://docs.nano.org)
 
 ## 🛠️ Technical Stack
@@ -213,7 +213,7 @@ See [LICENSE.md](LICENSE.md) for detailed terms and conditions.
 ## 🔗 Links
 
 - **API Base URL:** `https://api.x402nano.com`
-- **GitHub:** [Nano-x402](https://github.com/Andre1987n/Nano-x402)
+- **GitHub:** [Nano-x402](https://github.com/Andre1987n/x402Nano-API)
 - **Nano Website:** [nano.org](https://nano.org)
 
 ---
