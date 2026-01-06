@@ -170,6 +170,36 @@ curl -X POST https://api.x402nano.com/send \
 }
 ```
 
+## Step 6: Donate to Support Development (Optional)
+
+Support the x402 Nano API development with a quick donation:
+
+```bash
+curl -X POST https://api.x402nano.com/donate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "encrypted_wallet_string": "YOUR_ENCRYPTED_WALLET",
+    "password": "YourSecurePassword123!",
+    "amount": "0.5"
+  }'
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Thank you for your donation!"
+}
+```
+
+**Notes:**
+- Automatically sends to the official donation address
+- Works exactly like `/send` but simpler
+- Any amount is appreciated
+- Helps maintain and improve the API
+
+---
+
 ## Common Workflows
 
 ### Workflow 1: Create and Fund a New Wallet

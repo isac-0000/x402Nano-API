@@ -38,9 +38,10 @@ This API is currently in active development and testing. Please be aware:
    - [Get Balance](#5-get-balance)
    - [Receive Transactions](#6-receive-transactions)
    - [Send Transaction](#7-send-transaction)
-   - [Create Payment Transaction](#8-create-payment-transaction)
-   - [Pay Transaction](#9-pay-transaction)
-   - [Get Transaction Status](#10-get-transaction-status)
+   - [Donate](#8-donate)
+   - [Create Payment Transaction](#9-create-payment-transaction)
+   - [Pay Transaction](#10-pay-transaction)
+   - [Get Transaction Status](#11-get-transaction-status)
 3. [Error Handling](#error-handling)
 4. [Rate Limiting](#rate-limiting)
 5. [Security Best Practices](#security-best-practices)
@@ -431,7 +432,93 @@ curl -X POST https://api.x402nano.com/send \
 
 ---
 
-### 8. Create Payment Transaction
+### 8. Donate
+
+Donate Nano to support the x402 Nano API development. This endpoint simplifies the donation process by automatically sending to the official donation address.
+
+**Endpoint:** `POST /donate`
+
+⚠️ **API Key Required:** Must provide valid API key in wallet creation (embedded in `encrypted_wallet_string`)
+
+**Request Headers:**
+```json
+{
+  "Content-Type": "application/json"
+}
+```
+
+**Request Body:**
+```json
+{
+  "encrypted_wallet_string": "your_encrypted_wallet_string_here",
+  "password": "your_secure_password",
+  "amount": "0.1"
+}
+```
+
+**Parameters:**
+- `encrypted_wallet_string` (string, required): Your encrypted wallet data from wallet creation/unlock
+- `password` (string, required): Your wallet password to decrypt and sign
+- `amount` (string, required): Amount to donate in Nano (e.g., "0.1" for 0.1 NANO)
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Thank you for your donation!"
+}
+```
+
+**cURL Example:**
+```bash
+curl -X POST https://api.x402nano.com/donate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "encrypted_wallet_string": "your_encrypted_wallet_here",
+    "password": "YourSecureP@ss123",
+    "amount": "0.5"
+  }'
+```
+
+**PowerShell Example:**
+```powershell
+Invoke-RestMethod -Uri "https://api.x402nano.com/donate" `
+  -Method Post `
+  -Headers @{ "Content-Type" = "application/json" } `
+  -Body '{
+    "encrypted_wallet_string": "your_encrypted_wallet_here",
+    "password": "YourSecureP@ss123",
+    "amount": "0.5"
+  }'
+```
+
+**Notes:**
+- Donation address: `nano_3ep6fd8p1zcypgi3fsm7x3jr7n8qj57tk5ahpseqynaq7uafzo68bk6tci9n`
+- Works exactly like `/send` but automatically uses the donation address
+- Supports any amount in Nano
+- Transaction is processed immediately
+- Donations help maintain and improve the API infrastructure
+- Same security requirements as send endpoint (password validation, API key)
+
+**Error Response (Invalid Password):**
+```json
+{
+  "error": "invalid_password",
+  "message": "Invalid password provided"
+}
+```
+
+**Error Response (Insufficient Balance):**
+```json
+{
+  "error": "insufficient_balance",
+  "message": "Insufficient balance for this transaction"
+}
+```
+
+---
+
+### 9. Create Payment Transaction
 
 Create a temporary payment transaction for users to pay. Returns a unique transaction ID and payment details that expire after 60 minutes.
 
@@ -479,7 +566,7 @@ curl -X POST https://api.x402nano.com/api/transactions/create \
 
 ---
 
-### 9. Pay Transaction
+### 10. Pay Transaction
 
 Process payment for a previously created transaction using encrypted wallet credentials.
 
@@ -556,7 +643,7 @@ curl -X POST https://api.x402nano.com/api/transactions/pay \
 
 ---
 
-### 10. Get Transaction Status
+### 11. Get Transaction Status
 
 Check the payment status of a transaction with long-polling support (waits up to 30 seconds for payment confirmation).
 

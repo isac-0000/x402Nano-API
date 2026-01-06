@@ -29,6 +29,7 @@ Welcome to the x402 Nano API documentation. This API provides a secure, easy-to-
 
 ✅ **Transaction Processing**
 - Send Nano to any address
+- Quick donate endpoint for API support
 - Receive pending transactions automatically
 - Real-time balance queries
 - AI agent payment requests (create/pay/status)
