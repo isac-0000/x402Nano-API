@@ -112,6 +112,8 @@ Create a new Nano wallet with password encryption.
 
 **Endpoint:** `POST /wallet/create`
 
+**⚠️ REQUIRES API KEY:** This endpoint requires a valid API key in the request body.
+
 **Request Headers:**
 ```json
 {
@@ -128,6 +130,9 @@ Create a new Nano wallet with password encryption.
   "api_key": "your_api_key"
 }
 ```
+
+**Required Fields:**
+- `api_key` **(REQUIRED)** - Must be exactly 44 characters. Get one from [Create AI API Key](#1-create-ai-api-key)
 
 **Password Requirements:**
 - Must contain at least one uppercase letter
@@ -175,6 +180,8 @@ Import an existing Nano wallet using a private seed.
 
 **Endpoint:** `POST /wallet/import`
 
+**⚠️ REQUIRES API KEY:** This endpoint requires a valid API key in the request body.
+
 **Request Headers:**
 ```json
 {
@@ -191,6 +198,10 @@ Import an existing Nano wallet using a private seed.
   "api_key": "your_api_key"
 }
 ```
+
+**Required Fields:**
+- `api_key` **(REQUIRED)** - Must be exactly 44 characters. Get one from [Create AI API Key](#1-create-ai-api-key)
+- `private_wallet_seed` - Must be exactly 64 characters (hex)
 
 **Response:**
 ```json
@@ -220,6 +231,8 @@ curl -X POST https://api.x402nano.com/wallet/import \
 Decrypt and unlock a wallet for transaction operations.
 
 **Endpoint:** `POST /wallet/unlock`
+
+**⚠️ API KEY EMBEDDED:** The encrypted wallet string contains an embedded API key that is validated during decryption. You must have created or imported the wallet with a valid API key.
 
 **Request Headers:**
 ```json
@@ -320,6 +333,8 @@ Process and receive pending transactions for a wallet.
 
 **Endpoint:** `POST /receive`
 
+**⚠️ API KEY EMBEDDED:** The encrypted wallet string contains an embedded API key that is validated during decryption. You must have created or imported the wallet with a valid API key.
+
 **Request Headers:**
 ```json
 {
@@ -367,6 +382,8 @@ curl -X POST https://api.x402nano.com/receive \
 Send Nano to another address.
 
 **Endpoint:** `POST /send`
+
+**⚠️ API KEY EMBEDDED:** The encrypted wallet string contains an embedded API key that is validated during decryption. You must have created or imported the wallet with a valid API key.
 
 **Request Headers:**
 ```json
@@ -467,6 +484,8 @@ curl -X POST https://api.x402nano.com/api/transactions/create \
 Process payment for a previously created transaction using encrypted wallet credentials.
 
 **Endpoint:** `POST /api/transactions/pay`
+
+**⚠️ API KEY EMBEDDED:** The encrypted wallet string contains an embedded API key that is validated during decryption. You must have created or imported the wallet with a valid API key.
 
 **Request Headers:**
 ```json
@@ -619,11 +638,34 @@ All endpoints return standard HTTP status codes:
 }
 ```
 
+### Deep Nested Error Handling
+
+The API uses a **deep nested error handling** approach where errors are constructed at the point of failure:
+
+- Errors originate from the lowest level (e.g., RPC calls, database operations)
+- Each layer adds context as the error propagates up
+- This provides detailed, actionable error messages that help identify exactly where and why something failed
+
+**Example Error Chain:**
+```
+RPC Call Failed → Parse Error → API Error Response
+"Failed to parse RPC response: Failed to parse accounts_receivable response: unexpected field..."
+```
+
+This approach ensures:
+- **Precise error location**: Know exactly which operation failed
+- **Full context**: See the complete error chain from source to API response
+- **Better debugging**: Detailed messages help developers troubleshoot issues quickly
+
 **Common Error Messages:**
 - `"weak_password"` - Password doesn't meet requirements
 - `"invalid_credentials"` - Wrong password or encrypted wallet string
 - `"insufficient_balance"` - Not enough balance to send
 - `"invalid_address"` - Malformed Nano address
+- `"rpc_error"` - Nano node RPC call failed (includes detailed context)
+- `"rpc_response_parse_failed"` - Failed to parse RPC response (includes parse details)
+- `"database_error"` - Database operation failed
+- `"invalid_api_key"` - API key is invalid or missing (required for wallet operations)
 
 ---
 

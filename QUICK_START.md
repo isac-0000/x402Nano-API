@@ -45,6 +45,8 @@ CZtYHgn0Nk8KPvtlkwARjF+m601hC00pqYQwzXaKixU=
 
 Create a new Nano wallet:
 
+**⚠️ IMPORTANT:** You must include the API key from Step 1. This API key will be embedded in your encrypted wallet and required for all future wallet operations (unlock, send, receive).
+
 ```bash
 curl -X POST https://api.x402nano.com/wallet/create \
   -H "Content-Type: application/json" \
@@ -58,8 +60,15 @@ curl -X POST https://api.x402nano.com/wallet/create \
 
 **Password Requirements:**
 - Must contain at least one uppercase letter
+- Must contain at least one lowercase letter
+- Must contain at least one digit
 - Must contain at least one special character
 - Must match password_confirmation
+
+**API Key Requirements:****
+- Must be exactly 44 characters
+- Required for wallet creation, import, and all transaction operations
+- Gets embedded in your encrypted wallet data
 
 **Email (Optional but Recommended):**
 - Providing an email address will send you a backup of your encrypted wallet
@@ -314,6 +323,49 @@ async function quickStart() {
 
 quickStart().catch(console.error);
 ```
+
+## Error Handling
+
+### Deep Nested Errors
+
+The API uses a **deep nested error handling** approach. Errors are constructed at the point of failure and include full context:
+
+```json
+{
+  "error": "rpc_response_parse_failed",
+  "message": "Failed to parse RPC response: Failed to parse accounts_receivable response: unexpected field at line 1 column 42"
+}
+```
+
+**Benefits:**
+- Errors show exactly where and why something failed
+- Complete error chain from source to API response
+- Makes debugging easier with detailed context
+
+### Common Error Codes
+
+- `weak_password` - Password doesn't meet requirements (uppercase, lowercase, digit, special char)
+- `invalid_api_key` - API key is invalid, missing, or not exactly 44 characters
+- `invalid_credentials` - Wrong password or encrypted wallet string
+- `insufficient_balance` - Not enough balance to send
+- `invalid_address` - Malformed Nano address
+- `rpc_error` - Nano node RPC call failed (includes detailed context)
+- `rpc_response_parse_failed` - Failed to parse RPC response
+- `transaction_expired` - Payment transaction has expired (>60 minutes)
+- `amount_mismatch` - Payment amount doesn't match created transaction
+
+### API Key Requirements Summary
+
+**⚠️ All wallet operations require a valid API key:**
+
+- **Create Wallet** - API key must be provided in request body (44 characters)
+- **Import Wallet** - API key must be provided in request body (44 characters)
+- **Unlock Wallet** - API key is embedded in encrypted wallet (validated on decrypt)
+- **Send Transaction** - API key is embedded in encrypted wallet (validated on decrypt)
+- **Receive Transaction** - API key is embedded in encrypted wallet (validated on decrypt)
+- **Pay Transaction** - API key is embedded in encrypted wallet (validated on decrypt)
+
+The API key is embedded in your encrypted wallet data during creation/import and automatically validated whenever you decrypt the wallet.
 
 ## Troubleshooting
 

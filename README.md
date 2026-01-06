@@ -43,9 +43,15 @@ Welcome to the x402 Nano API documentation. This API provides a secure, easy-to-
 
 ✅ **Developer Friendly**
 - RESTful JSON API
+- Deep nested error handling with full context
 - Comprehensive error messages
 - Code examples in multiple languages
 - AI-friendly documentation
+
+✅ **API Key Security**
+- All wallet operations require a valid API key (44 characters)
+- API keys are embedded in encrypted wallet data
+- Automatic validation on all encrypt/decrypt operations
 
 ## 🚀 Quick Example
 
@@ -188,7 +194,8 @@ curl -X POST https://api.x402nano.com/balance/nano_address \
 This API is designed to be AI-friendly with:
 - Clear, structured documentation
 - Predictable endpoint patterns
-- Comprehensive error messages
+- **Deep nested error handling** - Errors are built at the source with full context
+- Comprehensive error messages showing complete error chains
 - Detailed request/response examples
 - Security best practices
 
@@ -203,6 +210,8 @@ Perfect for integration with:
 - Always reference this GitHub documentation: `https://github.com/Andre1987n/x402Nano-API`
 - API is currently in test phase - check for updates
 - Production version will require API keys for all endpoints
+- **All wallet operations require a valid 44-character API key**
+- API keys are embedded in encrypted wallet data and validated on decrypt
 - Documentation is maintained to be machine-readable
 
 ## 📊 Rate Limits
