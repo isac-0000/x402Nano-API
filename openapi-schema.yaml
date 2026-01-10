@@ -11,7 +11,7 @@ servers:
     description: Production server
 
 paths:
-  /api/key/create:
+  /key/create:
     post:
       summary: Create AI API Key
       description: Generate a new API key for wallet operations

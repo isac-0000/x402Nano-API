@@ -11,7 +11,7 @@ Implemented a complete transaction payment system with temporary transaction cre
 ## New Features
 
 ### 1. Create Payment Transaction
-- **Endpoint:** `POST /api/transactions/create`
+- **Endpoint:** `POST /transaction/create`
 - **Purpose:** Create temporary payment transactions for users
 - **Features:**
   - Generates unique UUID v4 transaction IDs
@@ -20,7 +20,7 @@ Implemented a complete transaction payment system with temporary transaction cre
   - Returns transaction details (ID, receive address, amount)
 
 ### 2. Pay Transaction
-- **Endpoint:** `POST /api/transactions/pay`
+- **Endpoint:** `POST /transaction/pay`
 - **Purpose:** Process payment for created transactions
 - **Features:**
   - Validates transaction ID existence
@@ -31,7 +31,7 @@ Implemented a complete transaction payment system with temporary transaction cre
   - Returns payment confirmation
 
 ### 3. Get Transaction Status
-- **Endpoint:** `GET /api/transactions/status/{transaction_id}`
+- **Endpoint:** `GET /transaction/status/{transaction_id}`
 - **Purpose:** Check payment status with long-polling
 - **Features:**
   - Long-polling (waits up to 30 seconds)
@@ -134,7 +134,7 @@ pub struct TransactionCacheData {
 ### JavaScript/TypeScript
 ```typescript
 // 1. Create transaction
-const createResponse = await fetch('https://api.x402nano.com/api/transactions/create', {
+const createResponse = await fetch('https://api.x402nano.com/transaction/create', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -145,7 +145,7 @@ const createResponse = await fetch('https://api.x402nano.com/api/transactions/cr
 const { transaction_id } = await createResponse.json();
 
 // 2. User pays transaction
-const payResponse = await fetch('https://api.x402nano.com/api/transactions/pay', {
+const payResponse = await fetch('https://api.x402nano.com/transaction/pay', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -158,7 +158,7 @@ const payResponse = await fetch('https://api.x402nano.com/api/transactions/pay',
 
 // 3. Check payment status (long-polling)
 const statusResponse = await fetch(
-  `https://api.x402nano.com/api/transactions/status/${transaction_id}`
+  `https://api.x402nano.com/transaction/status/${transaction_id}`
 );
 const status = await statusResponse.json();
 if (status.is_paid) {

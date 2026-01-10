@@ -86,7 +86,7 @@ Content-Type: application/json
 
 Generate a new API key for accessing the x402 Nano API.
 
-**Endpoint:** `POST /api/key/create`
+**Endpoint:** `POST /key/create`
 
 **Request Headers:**
 ```json
@@ -111,7 +111,7 @@ CZtYHgn0Nk8KPvtlkwARjF+m601hC00pqYQwzXaKixU=
 
 **cURL Example:**
 ```bash
-curl -X POST https://api.x402nano.com/api/key/create \
+curl -X POST https://api.x402nano.com/key/create \
   -H "Content-Type: application/json" \
   -d '{}'
 ```
@@ -535,7 +535,7 @@ Create a temporary payment transaction for users to pay. Returns a unique transa
 
 **NEW in v0.2.0:** Optional `callback_url` for webhook notifications and `metadata` for custom data.
 
-**Endpoint:** `POST /api/transactions/create`
+**Endpoint:** `POST /transaction/create`
 
 **Request Headers:**
 ```json
@@ -571,7 +571,7 @@ Create a temporary payment transaction for users to pay. Returns a unique transa
 
 **cURL Example:**
 ```bash
-curl -X POST https://api.x402nano.com/api/transactions/create \
+curl -X POST https://api.x402nano.com/transaction/create \
   -H "Content-Type: application/json" \
   -d '{
     "receive_address": "nano_1your_server_address",
@@ -591,7 +591,7 @@ curl -X POST https://api.x402nano.com/api/transactions/create \
 
 Process payment for a previously created transaction using encrypted wallet credentials.
 
-**Endpoint:** `POST /api/transactions/pay`
+**Endpoint:** `POST /transaction/pay`
 
 **⚠️ API KEY EMBEDDED:** The encrypted wallet string contains an embedded API key that is validated during decryption. You must have created or imported the wallet with a valid API key.
 
@@ -624,7 +624,7 @@ Process payment for a previously created transaction using encrypted wallet cred
 
 **cURL Example:**
 ```bash
-curl -X POST https://api.x402nano.com/api/transactions/pay \
+curl -X POST https://api.x402nano.com/transaction/pay \
   -H "Content-Type: application/json" \
   -d '{
     "transaction_id": "550e8400-e29b-41d4-a716-446655440000",
@@ -668,7 +668,7 @@ curl -X POST https://api.x402nano.com/api/transactions/pay \
 
 Check the payment status of a transaction with long-polling support (waits up to 30 seconds for payment confirmation).
 
-**Endpoint:** `GET /api/transactions/status/{transaction_id}`
+**Endpoint:** `GET /transaction/status/{transaction_id}`
 
 **Request Headers:**
 ```json
@@ -712,7 +712,7 @@ Check the payment status of a transaction with long-polling support (waits up to
 
 **cURL Example:**
 ```bash
-curl -X GET https://api.x402nano.com/api/transactions/status/550e8400-e29b-41d4-a716-446655440000 \
+curl -X GET https://api.x402nano.com/transaction/status/550e8400-e29b-41d4-a716-446655440000 \
   -H "Content-Type: application/json"
 ```
 
@@ -1063,7 +1063,7 @@ Webhooks provide instant push notifications when transactions are paid. Instead 
 
 1. **Create transaction with callback_url:**
 ```json
-POST /api/transactions/create
+POST /transaction/create
 {
   "receive_address": "nano_...",
   "amount": "1.5",
@@ -1181,7 +1181,7 @@ Metadata allows you to attach custom JSON data to transactions. This is perfect 
 
 **Create transaction with metadata:**
 ```json
-POST /api/transactions/create
+POST /transaction/create
 {
   "receive_address": "nano_...",
   "amount": "1.5",
@@ -1191,7 +1191,7 @@ POST /api/transactions/create
 
 **Retrieve in status check:**
 ```json
-GET /api/transactions/status/{id}
+GET /transaction/status/{id}
 {
   "success": "true",
   "is_paid": true,

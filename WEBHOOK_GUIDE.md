@@ -22,7 +22,7 @@ Webhooks provide instant push notifications when transactions are paid. Instead 
 ### 1. Create Transaction with Webhook
 
 ```bash
-curl -X POST https://api.x402nano.com/api/transactions/create \
+curl -X POST https://api.x402nano.com/transaction/create \
   -H "Content-Type: application/json" \
   -d '{
     "receive_address": "nano_1your_server_address",
@@ -332,7 +332,7 @@ ngrok http 5000
 
 3. **Create transaction with ngrok URL:**
 ```bash
-curl -X POST https://api.x402nano.com/api/transactions/create \
+curl -X POST https://api.x402nano.com/transaction/create \
   -H "Content-Type: application/json" \
   -d '{
     "receive_address": "nano_...",
