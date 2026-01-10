@@ -1,5 +1,13 @@
 # x402 Nano API - Public Documentation
 
+> 📝 **ABOUT x402 NANO**
+> 
+> **"x402"** is a brand name inspired by payment-required protocols. This API is a **payment gateway for Nano cryptocurrency** - similar to Stripe or PayPal, but for Nano.
+> 
+> This is **NOT** an implementation of the HTTP 402 Payment Required status code protocol. Instead, we provide a flexible REST API for payment processing, wallet management, and transaction handling.
+> 
+> **Think of us as:** "Stripe for Nano" - A modern payment processing API.
+
 > ⚠️ **BETA / TEST PHASE** ⚠️
 > 
 > This API is currently in **test/beta phase**. Most endpoints are currently publicly accessible for testing purposes.
@@ -11,7 +19,7 @@
 > 
 > Please check this documentation regularly for updates: [GitHub Repository](https://github.com/Andre1987n/x402Nano-API)
 
-Welcome to the x402 Nano API documentation. This API provides a secure, easy-to-use interface for managing Nano cryptocurrency wallets and transactions.
+Welcome to the x402 Nano API documentation. This API provides a secure, easy-to-use payment gateway for Nano cryptocurrency, with features for wallet management, transaction processing, and payment verification.
 
 ## 📚 Documentation Index
 
@@ -39,7 +47,12 @@ Welcome to the x402 Nano API documentation. This API provides a secure, easy-to-
 - Quick donate endpoint for API support
 - Receive pending transactions automatically
 - Real-time balance queries
-- AI agent payment requests (create/pay/status)
+
+✅ **Payment Gateway** 🆕
+- Create payment transactions with unique IDs
+- Webhook notifications for instant payment alerts
+- Metadata support for custom data (max 4KB JSON)
+- PostgreSQL persistence for audit trail
 - Long-polling payment confirmation (30s timeout)
 - Auto-expiring transactions (60 minutes)
 
@@ -47,6 +60,7 @@ Welcome to the x402 Nano API documentation. This API provides a secure, easy-to-
 - AES-256 wallet encryption
 - HTTPS-only communication
 - No private key exposure
+- HMAC-SHA256 webhook signatures
 - Rate limiting and DDoS protection
 
 ✅ **Developer Friendly**

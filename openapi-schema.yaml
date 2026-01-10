@@ -1,8 +1,8 @@
 openapi: 3.1.0
 info:
   title: x402 Nano API
-  description: Secure Nano cryptocurrency wallet management API
-  version: 1.0.0
+  description: Secure Nano cryptocurrency wallet management and payment gateway API
+  version: 0.2.0
   contact:
     url: https://github.com/Andre1987n/x402Nano-API
 
@@ -341,7 +341,7 @@ paths:
   /transaction/create:
     post:
       summary: Create Payment Transaction
-      description: Create a temporary payment request (AI agent use case)
+      description: Create a temporary payment request with optional webhook and metadata support
       operationId: createTransaction
       requestBody:
         required: true
@@ -361,6 +361,15 @@ paths:
                   type: string
                   description: Amount in NANO
                   example: "0.1"
+                callback_url:
+                  type: string
+                  format: uri
+                  description: Optional webhook URL for instant payment notifications
+                  example: https://yoursite.com/webhook
+                metadata:
+                  type: string
+                  description: Optional JSON string with custom data (max 4KB)
+                  example: '{"order_id":"ORD-123","customer":"user@example.com"}'
       responses:
         '200':
           description: Transaction created
@@ -465,6 +474,10 @@ paths:
                     type: string
                   is_paid:
                     type: boolean
+                  metadata:
+                    type: string
+                    description: Custom JSON data if provided during creation
+                    example: '{"order_id":"ORD-123"}'
 
 components:
   schemas:
